@@ -22,6 +22,9 @@ sqlc:
 test:
 	go test -v -cover ./...
 
-.PHONY: postgres createdb dropdb migrationcreate migrateup migratedown sqlc test
+server:
+	go run main.go
+
+.PHONY: postgres createdb dropdb migrationcreate migrateup migratedown sqlc test server
 
 # docker exec -it postgres17 psql -U root -d simple_bank
