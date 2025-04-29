@@ -1,5 +1,5 @@
 postgres:
-	docker run --name postgres17 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres
+	docker run --name postgres17 -p 5432:5432 --network bank-network -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres
 
 createdb:
 	docker exec -it postgres17 createdb --username=root --owner=root simple_bank
@@ -30,6 +30,9 @@ test:
 
 server:
 	go run main.go
+
+runcontainer: 
+	docker run --name simplebank -p 8080:8080 --network bank-network -e GIN_MODE=release -e DB_SOURCE="postgresql://root:secret@postgres17:5432/simple_bank?sslmode=disable"  simplebank:latest
 
 mock: 
 	mockgen -package mockdb -destination db/mock/store.go github.com/jesse-121/simple_bank_project/db/sqlc Store   
