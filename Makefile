@@ -40,3 +40,4 @@ mock:
 .PHONY: postgres createdb dropdb migrationcreate migrateup migrateup1 migratedown migratedown1 sqlc test server mock
 
 # docker exec -it postgres17 psql -U root -d simple_bank
+
