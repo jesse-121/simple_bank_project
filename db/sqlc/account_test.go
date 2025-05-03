@@ -100,6 +100,6 @@ func TestListAccounts(t *testing.T) {
 
 	for _, account := range accounts {
 		require.NotEmpty(t, account)
-		require.Equal(t, account, lastAccount.Owner)
+		require.Equal(t, account.Owner, lastAccount.Owner)
 	}
 }
